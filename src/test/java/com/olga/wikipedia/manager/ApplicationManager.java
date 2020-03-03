@@ -2,14 +2,20 @@ package com.olga.wikipedia.manager;
 
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
 
+    Logger logger = LoggerFactory.getLogger(ApplicationManager.class);
+
     AppiumDriver driver;
     ArticleHelper articleHelper;
+    SessionHelper sessionHelper;
 
     public void init() throws MalformedURLException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -24,7 +30,10 @@ public class ApplicationManager {
 
         driver = new AppiumDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
 
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
         articleHelper = new ArticleHelper(driver);
+        sessionHelper = new SessionHelper(driver);
     }
 
     public void stop() throws InterruptedException {
@@ -34,5 +43,9 @@ public class ApplicationManager {
 
     public ArticleHelper getArticleHelper() {
         return articleHelper;
+    }
+
+    public SessionHelper getSessionHelper() {
+        return sessionHelper;
     }
 }

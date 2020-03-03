@@ -2,8 +2,11 @@
   <dictionary name="olgabasina">
     <words>
       <w>appium</w>
+      <w>gmail</w>
       <w>olgabasina</w>
+      <w>olgatester</w>
       <w>onboarding</w>
+      <w>snackbar</w>
     </words>
   </dictionary>
 </component>

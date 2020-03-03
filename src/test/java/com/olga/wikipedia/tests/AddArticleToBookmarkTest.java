@@ -1,11 +1,10 @@
 package com.olga.wikipedia.tests;
 
 import com.olga.wikipedia.model.Article;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class SearchArticleTest extends TestBase {
+public class AddArticleToBookmarkTest extends TestBase {
 
     @BeforeMethod
     public void ensurePrecondition() {
@@ -15,13 +14,13 @@ public class SearchArticleTest extends TestBase {
     }
 
     @Test
-    public void testSearchArticle()  {
-
+    public void testAddArticleToBookMark() throws InterruptedException {
         app.getArticleHelper().searchArticle(new Article()
                 .withArticleName("Android"));
-
-        Assert.assertTrue(app.getArticleHelper().isThereResult(20));
-
-        app.getArticleHelper().swipeArticlesUp();
+        app.getArticleHelper().tapEnter();
+        app.getArticleHelper().bookmarkButton();
+        app.getArticleHelper().gotItButton();
+        app.getArticleHelper().addToSaved();
+//        app.getArticleHelper().viewList();
     }
 }
