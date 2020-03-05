@@ -31,6 +31,10 @@ public class TestBase {
     @BeforeSuite
     public void setUp() throws MalformedURLException {
         app.init();
+
+        if (app.getSessionHelper().isSkipButtonPresent()) {
+            app.getSessionHelper().skipButton();
+        }
     }
 
     @AfterSuite

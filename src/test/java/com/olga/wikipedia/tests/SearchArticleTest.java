@@ -2,23 +2,26 @@ package com.olga.wikipedia.tests;
 
 import com.olga.wikipedia.model.Article;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class SearchArticleTest extends TestBase {
 
-    @BeforeMethod
-    public void ensurePrecondition() {
-        if (app.getSessionHelper().isSkipButtonPresent()) {
-            app.getSessionHelper().skipButton();
-        }
+    @Test
+    public void testSearchArticle() throws InterruptedException {
+
+        String articleName = "Android";
+        app.getArticleHelper().searchArticle(new Article()
+                .withArticleName(articleName));
+        app.getArticleHelper().tapEnter();
+
+        Assert.assertTrue(app.getArticleHelper().isArticlePresent(articleName));
     }
 
-    @Test
-    public void testSearchArticle()  {
-
+    @Test(enabled = false)
+    public void testSearchArticleList() {
+        String articleName = "Java";
         app.getArticleHelper().searchArticle(new Article()
-                .withArticleName("Android"));
+                .withArticleName(articleName));
 
         Assert.assertTrue(app.getArticleHelper().isThereResult(20));
 
